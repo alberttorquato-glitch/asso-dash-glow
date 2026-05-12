@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { BarChart3, LogOut } from "lucide-react";
+import { BarChart3, LogOut, ShieldCheck } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { Button } from "@/components/ui/button";
 
 export function AppHeader() {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useIsAdmin();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -25,7 +27,12 @@ export function AppHeader() {
           </div>
         </Link>
         {user && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/admin"><ShieldCheck className="h-4 w-4" />Admin</Link>
+              </Button>
+            )}
             <span className="hidden text-sm text-muted-foreground sm:inline">{user.email}</span>
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />
