@@ -89,28 +89,45 @@ function DashboardPage() {
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((a) => (
-                <Link
-                  key={a.id}
-                  to="/bi/$slug"
-                  params={{ slug: a.slug }}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-gradient-card p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-elegant"
-                >
-                  <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-primary opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
-                  <div className="relative flex items-start justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
-                      <BarChart3 className="h-5 w-5" />
+              {filtered.map((a, i) => {
+                const palette = [
+                  "var(--brand-green)",
+                  "var(--brand-yellow)",
+                  "var(--brand-orange)",
+                  "var(--brand-red)",
+                  "var(--brand-purple)",
+                  "var(--primary)",
+                ];
+                const c = palette[i % palette.length];
+                return (
+                  <Link
+                    key={a.id}
+                    to="/bi/$slug"
+                    params={{ slug: a.slug }}
+                    className="group relative overflow-hidden rounded-2xl border border-border bg-gradient-card p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-elegant"
+                  >
+                    <div
+                      className="absolute -right-12 -top-12 h-32 w-32 rounded-full opacity-0 blur-2xl transition-opacity group-hover:opacity-40"
+                      style={{ background: c }}
+                    />
+                    <div className="relative flex items-start justify-between">
+                      <div
+                        className="flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-glow"
+                        style={{ background: c }}
+                      >
+                        <BarChart3 className="h-5 w-5" />
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
                     </div>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                  </div>
-                  <div className="relative mt-6">
-                    <h3 className="font-display text-xl font-semibold">{a.name}</h3>
-                    <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
-                      Power BI Dashboard
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="relative mt-6">
+                      <h3 className="font-display text-xl font-semibold">{a.name}</h3>
+                      <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                        Power BI Dashboard
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>
