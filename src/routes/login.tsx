@@ -2,8 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { BarChart3, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -61,11 +62,13 @@ function LoginPage() {
         <div className="absolute inset-0 opacity-30" style={{
           backgroundImage: "radial-gradient(circle at 20% 20%, white 0, transparent 40%), radial-gradient(circle at 80% 70%, white 0, transparent 35%)",
         }} />
-        <div className="relative flex items-center gap-2.5 text-primary-foreground">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/15 backdrop-blur">
-            <BarChart3 className="h-5 w-5" />
+        <div className="relative flex items-center gap-3">
+          <div className="rounded-xl bg-white px-4 py-2.5 shadow-lg">
+            <Logo className="h-8 w-auto" />
           </div>
-          <span className="font-display text-lg font-semibold">BI Hub</span>
+          <span className="font-display text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground/80">
+            BI Hub
+          </span>
         </div>
         <div className="relative space-y-4 text-primary-foreground">
           <h1 className="font-display text-4xl font-bold leading-tight">
@@ -82,9 +85,7 @@ function LoginPage() {
       <div className="flex items-center justify-center bg-background p-6 sm:p-12">
         <div className="w-full max-w-md">
           <div className="mb-8 lg:hidden">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
-              <BarChart3 className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <Logo className="h-10 w-auto" />
           </div>
           <h2 className="font-display text-2xl font-semibold">Bem-vindo de volta</h2>
           <p className="mt-1 text-sm text-muted-foreground">Entre com seu email e senha para acessar os painéis.</p>
