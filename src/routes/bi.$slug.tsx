@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, ExternalLink, Loader2, Maximize2 } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText, Loader2, Maximize2 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { AppHeader } from "@/components/AppHeader";
@@ -56,7 +56,12 @@ function BiPage() {
             </div>
           </div>
           {data && (
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="default" size="sm">
+                <Link to="/relatorio/$slug" params={{ slug }}>
+                  <FileText className="h-4 w-4" />Relatório
+                </Link>
+              </Button>
               <Button variant="outline" size="sm" onClick={openFullscreen}>
                 <Maximize2 className="h-4 w-4" />Tela cheia
               </Button>

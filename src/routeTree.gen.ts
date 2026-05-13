@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RelatorioSlugRouteImport } from './routes/relatorio.$slug'
 import { Route as BiSlugRouteImport } from './routes/bi.$slug'
 
 const LoginRoute = LoginRouteImport.update({
@@ -35,6 +36,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RelatorioSlugRoute = RelatorioSlugRouteImport.update({
+  id: '/relatorio/$slug',
+  path: '/relatorio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BiSlugRoute = BiSlugRouteImport.update({
   id: '/bi/$slug',
   path: '/bi/$slug',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/bi/$slug': typeof BiSlugRoute
+  '/relatorio/$slug': typeof RelatorioSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/bi/$slug': typeof BiSlugRoute
+  '/relatorio/$slug': typeof RelatorioSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,33 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/bi/$slug': typeof BiSlugRoute
+  '/relatorio/$slug': typeof RelatorioSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/dashboard' | '/login' | '/bi/$slug'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/dashboard'
+    | '/login'
+    | '/bi/$slug'
+    | '/relatorio/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/dashboard' | '/login' | '/bi/$slug'
-  id: '__root__' | '/' | '/admin' | '/dashboard' | '/login' | '/bi/$slug'
+  to:
+    | '/'
+    | '/admin'
+    | '/dashboard'
+    | '/login'
+    | '/bi/$slug'
+    | '/relatorio/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/dashboard'
+    | '/login'
+    | '/bi/$slug'
+    | '/relatorio/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +105,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   BiSlugRoute: typeof BiSlugRoute
+  RelatorioSlugRoute: typeof RelatorioSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/relatorio/$slug': {
+      id: '/relatorio/$slug'
+      path: '/relatorio/$slug'
+      fullPath: '/relatorio/$slug'
+      preLoaderRoute: typeof RelatorioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bi/$slug': {
       id: '/bi/$slug'
       path: '/bi/$slug'
@@ -125,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   BiSlugRoute: BiSlugRoute,
+  RelatorioSlugRoute: RelatorioSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
